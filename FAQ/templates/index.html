@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FAQ AI Agent</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-logo">✦</div>
+
+            <div>
+                <h2>FAQ Agent</h2>
+                <span>AI Assistant</span>
+            </div>
+        </div>
+
+
+        <button class="new-chat" onclick="newChat()">
+            <span>＋</span>
+            New conversation
+        </button>
+
+
+        <div class="sidebar-section">
+
+            <div class="section-title">
+                KNOWLEDGE BASE
+            </div>
+
+            <div class="knowledge-item active">
+                <span class="kb-icon">◈</span>
+
+                <div>
+                    <strong>FAQ Knowledge Base</strong>
+                    <small>Active</small>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-section">
+
+            <div class="section-title">
+                AGENT STATUS
+            </div>
+
+            <div class="agent-status">
+
+                <div class="status-dot"></div>
+
+                <div>
+                    <strong>Agent Online</strong>
+                    <small>Ready to answer</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="powered">
+                <span>⚡</span>
+                <div>
+                    <small>Powered by</small>
+                    <strong>NLP + TF-IDF</strong>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="agent-title">
+
+                <div class="agent-avatar">
+                    ✦
+                </div>
+
+                <div>
+                    <h1>FAQ AI Agent</h1>
+
+                    <div class="online-status">
+                        <span></span>
+                        Online
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <button class="icon-button" title="Information">
+                    ⓘ
+                </button>
+
+                <button class="icon-button" title="Settings">
+                    ⚙
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CHAT ================= -->
+
+        <section class="chat-area" id="chat-box">
+
+
+            <!-- Welcome -->
+
+            <div class="welcome">
+
+                <div class="welcome-icon">
+                    ✦
+                </div>
+
+                <h2>How can I help?</h2>
+
+                <p>
+                    Ask me anything from the FAQ knowledge base.
+                    I'll find the most relevant answer for you.
+                </p>
+
+            </div>
+
+
+            <!-- Suggested Questions -->
+
+            <div class="suggestions">
+
+                <button onclick="useSuggestion('How can I apply for admission?')">
+                    <span>🎓</span>
+                    <div>
+                        <strong>Admission</strong>
+                        <small>How can I apply?</small>
+                    </div>
+                </button>
+
+
+                <button onclick="useSuggestion('What documents are required for admission?')">
+                    <span>📄</span>
+                    <div>
+                        <strong>Documents</strong>
+                        <small>What documents do I need?</small>
+                    </div>
+                </button>
+
+
+                <button onclick="useSuggestion('How can I pay my college fees?')">
+                    <span>💳</span>
+                    <div>
+                        <strong>Fees</strong>
+                        <small>How can I pay?</small>
+                    </div>
+                </button>
+
+
+                <button onclick="useSuggestion('How can I check my attendance?')">
+                    <span>📊</span>
+                    <div>
+                        <strong>Attendance</strong>
+                        <small>Check my attendance</small>
+                    </div>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= INPUT ================= -->
+
+        <footer class="input-section">
+
+            <div class="input-wrapper">
+
+                <button class="attach-button">
+                    ＋
+                </button>
+
+                <input
+                    type="text"
+                    id="user-input"
+                    placeholder="Ask your question..."
+                    autocomplete="off"
+                >
+
+                <button
+                    class="send-button"
+                    id="send-button"
+                    onclick="sendMessage()"
+                >
+                    <span>↑</span>
+                </button>
+
+            </div>
+
+
+            <div class="input-footer">
+
+                <span>
+                    FAQ Agent can make mistakes. Verify important information.
+                </span>
+
+                <span>
+                    Enter ↵ to send
+                </span>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+
+const input = document.getElementById("user-input");
+const chatBox = document.getElementById("chat-box");
+const sendButton = document.getElementById("send-button");
+
+
+// ========================================
+// ENTER TO SEND
+// ========================================
+
+input.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        sendMessage();
+
+    }
+
+});
+
+
+// ========================================
+// SUGGESTION BUTTON
+// ========================================
+
+function useSuggestion(question) {
+
+    input.value = question;
+
+    sendMessage();
+
+}
+
+
+// ========================================
+// ADD USER MESSAGE
+// ========================================
+
+function addUserMessage(message) {
+
+    const row = document.createElement("div");
+
+    row.className = "chat-message user-message";
+
+    row.innerHTML = `
+
+        <div class="message-content">
+
+            <div class="message-label">
+                You
+            </div>
+
+            <p>${escapeHTML(message)}</p>
+
+        </div>
+
+        <div class="user-avatar">
+            U
+        </div>
+
+    `;
+
+    chatBox.appendChild(row);
+
+    scrollBottom();
+
+}
+
+
+// ========================================
+// ADD BOT MESSAGE
+// ========================================
+
+function addBotMessage(message) {
+
+    const row = document.createElement("div");
+
+    row.className = "chat-message bot-message";
+
+    row.innerHTML = `
+
+        <div class="bot-message-avatar">
+            ✦
+        </div>
+
+        <div class="message-content">
+
+            <div class="message-label">
+                FAQ Agent
+                <span class="verified">
+                    ●
+                </span>
+            </div>
+
+            <p>${escapeHTML(message)}</p>
+
+        </div>
+
+    `;
+
+    chatBox.appendChild(row);
+
+    scrollBottom();
+
+}
+
+
+// ========================================
+// TYPING INDICATOR
+// ========================================
+
+function showTyping() {
+
+    const typing = document.createElement("div");
+
+    typing.id = "typing";
+
+    typing.className = "chat-message bot-message";
+
+    typing.innerHTML = `
+
+        <div class="bot-message-avatar">
+            ✦
+        </div>
+
+        <div class="typing-content">
+
+            <div class="message-label">
+                FAQ Agent
+            </div>
+
+            <div class="typing-dots">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+    `;
+
+    chatBox.appendChild(typing);
+
+    scrollBottom();
+
+}
+
+
+// ========================================
+// REMOVE TYPING
+// ========================================
+
+function removeTyping() {
+
+    const typing = document.getElementById("typing");
+
+    if (typing) {
+        typing.remove();
+    }
+
+}
+
+
+// ========================================
+// SEND MESSAGE
+// ========================================
+
+async function sendMessage() {
+
+    const question = input.value.trim();
+
+    if (!question) {
+        return;
+    }
+
+
+    // Remove welcome screen
+    const welcome = document.querySelector(".welcome");
+
+    if (welcome) {
+        welcome.remove();
+    }
+
+
+    const suggestions = document.querySelector(".suggestions");
+
+    if (suggestions) {
+        suggestions.remove();
+    }
+
+
+    addUserMessage(question);
+
+    input.value = "";
+
+    sendButton.disabled = true;
+
+    showTyping();
+
+
+    try {
+
+        const response = await fetch("/ask", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                question: question
+            })
+
+        });
+
+
+        if (!response.ok) {
+            throw new Error("Server error");
+        }
+
+
+        const data = await response.json();
+
+
+        setTimeout(() => {
+
+            removeTyping();
+
+            addBotMessage(data.answer);
+
+            sendButton.disabled = false;
+
+            input.focus();
+
+        }, 500);
+
+
+    }
+
+    catch (error) {
+
+        removeTyping();
+
+        addBotMessage(
+            "I couldn't connect to the FAQ service. Please try again."
+        );
+
+        sendButton.disabled = false;
+
+        console.error(error);
+
+    }
+
+}
+
+
+// ========================================
+// NEW CHAT
+// ========================================
+
+function newChat() {
+
+    location.reload();
+
+}
+
+
+// ========================================
+// ESCAPE HTML
+// ========================================
+
+function escapeHTML(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+// ========================================
+// SCROLL
+// ========================================
+
+function scrollBottom() {
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+}
+
+
+input.focus();
+
+</script>
+
+</body>
+
+</html>

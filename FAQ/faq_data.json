@@ -1,0 +1,102 @@
+[
+    {
+        "questions": [
+            "What is your college name?",
+            "What is the name of your college?",
+            "Which college is this?",
+            "Tell me the college name.",
+            "What college do you belong to?"
+        ],
+        "answer": "Our college is Mysore University School of Engineering."
+    },
+    {
+        "questions": [
+            "What courses are offered?",
+            "Which courses are available?",
+            "What programs does the college offer?",
+            "What can I study here?",
+            "What engineering courses are available?"
+        ],
+        "answer": "The college offers various engineering and technology programs."
+    },
+    {
+        "questions": [
+            "What is the college location?",
+            "Where is the college located?",
+            "Where is the college?",
+            "What is the location of the college?",
+            "Where can I find the college?"
+        ],
+        "answer": "The college is located in Mysore, Karnataka."
+    },
+    {
+        "questions": [
+            "How can I contact the college?",
+            "How do I contact the college?",
+            "How can I reach the college?",
+            "What are the college contact details?",
+            "How can I get in touch with the college?"
+        ],
+        "answer": "You can contact the college through its official contact channels."
+    },
+    {
+        "questions": [
+            "What are the college timings?",
+            "What are the college working hours?",
+            "When does the college open?",
+            "When does the college close?",
+            "What time does college start?"
+        ],
+        "answer": "The regular college timings are during working hours on weekdays."
+    },
+    {
+        "questions": [
+            "Does the college provide internships?",
+            "Are internships available?",
+            "Can I apply for an internship?",
+            "Does the college offer internships?",
+            "How can I get an internship?"
+        ],
+        "answer": "Yes, internship opportunities may be available. Students can check with the college or relevant department for current opportunities."
+    },
+    {
+        "questions": [
+            "How can I apply for admission?",
+            "How do I get admission?",
+            "How can I join the college?",
+            "What is the admission process?",
+            "How do I apply to the college?"
+        ],
+        "answer": "You can apply for admission by following the official admission process and submitting the required documents."
+    },
+    {
+        "questions": [
+            "What documents are required for admission?",
+            "Which documents do I need for admission?",
+            "What documents are needed to join the college?",
+            "What should I bring for admission?",
+            "What are the admission documents?"
+        ],
+        "answer": "The required documents depend on the admission process and program. Students should check the official admission guidelines for the current requirements."
+    },
+    {
+        "questions": [
+            "Does the college have a library?",
+            "Is there a library in the college?",
+            "Does the college provide library facilities?",
+            "Is there a library facility?",
+            "Can students use the library?"
+        ],
+        "answer": "Yes, the college provides library facilities for students."
+    },
+    {
+        "questions": [
+            "Does the college have a canteen?",
+            "Is there a canteen?",
+            "Does the college provide food facilities?",
+            "Is there a college cafeteria?",
+            "Where can students get food?"
+        ],
+        "answer": "Yes, the college has food and canteen facilities for students."
+    }
+]
